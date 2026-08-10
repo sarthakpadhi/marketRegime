@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+
+# internal working docs -- kept locally, not part of the published project
+CRITIQUE.md
+RESULTS.md
