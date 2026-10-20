@@ -41,6 +41,29 @@ is descriptive.
 
 The jump model follows [Shu, Yu and Mulvey (2024), arXiv 2402.05272](https://arxiv.org/abs/2402.05272).
 
+## Figures
+
+Nifty 50, out of sample. The HMM and jump-model regimes use only past data (walk-forward refits).
+
+![Nifty 50 with the HMM stress state and the jump-model bear state](docs/figures/nifty_regimes.png)
+
+The HMM's stress state is rare and short-lived and covers the Covid crash; the jump model stays in its
+bear state for longer stretches. Both flag after the price has already started falling.
+
+![Growth of 1 and drawdowns for buy and hold, EWMA vol-target, the HMM overlay and the jump model](docs/figures/strategy_equity.png)
+
+Buy and hold compounds fastest (4.1x) but suffers a -38% drawdown. The jump model (3.5x) keeps its worst
+drawdown near -16%. The HMM overlay and EWMA vol-targeting finish at about 2.9x with near-identical
+paths, so the HMM adds nothing over the volatility rule. All net of 10 bps costs.
+
+![Sharpe, worst drawdown and turnover for each strategy](docs/figures/strategy_scorecard.png)
+
+The jump model has the best Sharpe and drawdown among the timing rules, but no rule beats buy and hold
+on return. The HMM sits level with the vol-targeting baselines. The Sharpe gap between the jump model
+and the vol-targets was not statistically significant (see the jump-model notebook).
+
+Regenerate with `python docs/make_figures.py` after running `regime-event-diagnostics.ipynb`.
+
 ## Repository map
 
 ```
@@ -57,6 +80,7 @@ macro-regime.ipynb, micro-regime.ipynb, regime_prediction.ipynb
                           legacy first-version notebooks (look-ahead; kept for history)
 NIFTY.csv, VIX.csv        raw legacy input data
 docs/legacy_v1_README.md  superseded first write-up
+docs/make_figures.py      builds the README charts into docs/figures/
 ```
 
 Market data for the newer tests is downloaded with `yfinance` on first run and cached as CSV
